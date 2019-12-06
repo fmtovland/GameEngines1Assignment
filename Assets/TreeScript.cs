@@ -43,9 +43,8 @@ public class TreeScript : MonoBehaviour
                 g.transform.rotation=rotations[i];
                 t = g.GetComponent<TreeScript>();
                 t.spawnSide = (Side)i;
-                Debug.Log(rotations[i]);
                 t.ancestors[i]=ancestors[i]+1;
-                t.StartCoroutine(t.grow());
+                //t.StartCoroutine(t.grow());
                 yield return new WaitForEndOfFrame();
             }
         }
