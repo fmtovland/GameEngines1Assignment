@@ -27,7 +27,7 @@ public class TreeScript : MonoBehaviour
         {
             GameObject g = Instantiate(Cell,transform);
             TreeScript t = g.GetComponent<TreeScript>();
-            t.ancestors[sidenum]+=1;
+            t.ancestors[sidenum]=ancestors[sidenum]+1;
             t.spawnSide=spawnSide;
             t.StartCoroutine(t.grow());
         }
@@ -43,6 +43,7 @@ public class TreeScript : MonoBehaviour
                 g.transform.rotation=rotations[i];
                 t = g.GetComponent<TreeScript>();
                 t.spawnSide = (Side)i;
+                t.ancestors[i]=ancestors[i]+1;
                 Debug.Log((Side)i);
                 yield return new WaitForEndOfFrame();
             }
