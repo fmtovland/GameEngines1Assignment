@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7200847013668151771}
   - component: {fileID: 7200847013668151772}
   - component: {fileID: 7200847013668151773}
-  - component: {fileID: 7200847013668151774}
+  - component: {fileID: 4662047919092935259}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Untagged
@@ -89,11 +89,11 @@ BoxCollider:
   m_GameObject: {fileID: 7200847013668151775}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7200847013668151774
+--- !u!114 &4662047919092935259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,10 +102,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7200847013668151775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521dc2290c4333adaaf25c04d878e5e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2410dab54e8d92706a9165f696b62457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSide: 4
-  Cell: {fileID: 7200847013668151775, guid: 4882d76df9c4b6a35b6bac4f0614d2a0, type: 3}
-  limits: 010000000100000001000000010000000a000000
+  Cell: {fileID: 0}
+  tree: {fileID: 0}
   ancestors: 0000000000000000000000000000000000000000
