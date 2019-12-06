@@ -7,10 +7,10 @@ public class TreeScript : MonoBehaviour
     public enum Side {North, South, West, East, Below};
     public Side spawnSide;
 
-    public static Quaternion[] rotations={new Quaternion(90,0,0,0)
-                                        ,new Quaternion(90,90,0,0)
-                                        ,new Quaternion(90,180,0,0)
-                                        ,new Quaternion(90,270,0,0)};
+    public static Quaternion[] rotations={Quaternion.AngleAxis(90,Vector3.up) * Quaternion.AngleAxis(90,Vector3.forward)
+                                        ,Quaternion.AngleAxis(180,Vector3.up) * Quaternion.AngleAxis(90,Vector3.forward)
+                                        ,Quaternion.AngleAxis(270,Vector3.up) * Quaternion.AngleAxis(90,Vector3.forward)
+                                        ,Quaternion.AngleAxis(360,Vector3.up) * Quaternion.AngleAxis(90,Vector3.forward)};
 
     public GameObject Cell;
 
@@ -43,8 +43,9 @@ public class TreeScript : MonoBehaviour
                 g.transform.rotation=rotations[i];
                 t = g.GetComponent<TreeScript>();
                 t.spawnSide = (Side)i;
+                Debug.Log(rotations[i]);
                 t.ancestors[i]=ancestors[i]+1;
-                Debug.Log((Side)i);
+                t.StartCoroutine(t.grow());
                 yield return new WaitForEndOfFrame();
             }
         }
