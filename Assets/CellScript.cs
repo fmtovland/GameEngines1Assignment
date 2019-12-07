@@ -41,10 +41,10 @@ public class CellScript : MonoBehaviour
             for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+4ul) == 1)
             {
                 g = Instantiate(tree.rootCell,transform);
-                g.transform.rotation=rotations[i];
+                g.transform.rotation*=rotations[i];
                 t = g.GetComponent<CellScript>();
                 t.spawnSide = (Side)i;
-                t.ancestors=ancestors+branchPenalty;
+                t.ancestors=ancestors+(branchPenalty*(1+branches));
                 t.branches=branches+1;
                 t.tree=tree;
                 t.parent=this;
