@@ -39,7 +39,8 @@ public class CellScript : MonoBehaviour
 
             if(branches<tree.branchLimit)
             {
-                int branchPenalty = tree.limit/(ancestors-tree.lowestBranch);
+                int num = ancestors-tree.lowestBranch;
+                int branchPenalty = tree.limit/(num==0?1:num);
 
                 if(branches>0) for(int i=0; i<3; i+=2) 
                 {

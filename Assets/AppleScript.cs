@@ -6,6 +6,7 @@ public class AppleScript : MonoBehaviour
 {
     static Vector3 growthRate = new Vector3(.0005f,.0005f,.0005f);
     public CellScript parentCell;
+    public ulong seed;
 
     public IEnumerator drop()
     {
@@ -20,17 +21,31 @@ public class AppleScript : MonoBehaviour
 
     public IEnumerator grow()
     {
-        float grown=0;
         int leaves = parentCell.countLeaves();
 
-        if(leaves>0) while(grown < 2f)
+        if(leaves>0) while(transform.localScale.x<1f)
         {
+            leaves = parentCell.countLeaves();
             transform.localScale+=(growthRate * leaves);
-            grown += (.1f * leaves);
             yield return new WaitForSeconds(.1f);
         }
 
-        Debug.Log(parentCell.getPedigree());
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        StartCoroutine(fall());
+    }
+
+    public IEnumerator fall()
+    {
+        seed=parentCell.getPedigree()*(ulong)parentCell.countLeaves();
+        yield return new WaitForSeconds(seed%20);
+        Rigidbody r = gameObject.AddComponent<Rigidbody>();
+        r.mass=transform.localScale.x;
+        r.isKinematic=false;
+        transform.parent = null;
     }
 
     // Start is called before the first frame update
