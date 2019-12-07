@@ -36,6 +36,7 @@ public class CellScript : MonoBehaviour
         {
             GameObject g;
             CellScript t;
+            int branchPenalty = tree.limit/(ancestors-tree.lowestBranch);
 
             for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+4ul) == 1)
             {
@@ -43,7 +44,7 @@ public class CellScript : MonoBehaviour
                 g.transform.rotation=rotations[i];
                 t = g.GetComponent<CellScript>();
                 t.spawnSide = (Side)i;
-                t.ancestors=ancestors+1;
+                t.ancestors=ancestors+branchPenalty;
                 t.branches=branches+1;
                 t.tree=tree;
                 t.parent=this;
