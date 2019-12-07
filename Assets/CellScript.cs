@@ -20,7 +20,8 @@ public class CellScript : MonoBehaviour
 
     public IEnumerator spawn()
     {
-        yield return new WaitForSeconds(1);
+        tree.seed *= getPedigree();
+        yield return new WaitForSeconds(3);
         GameObject g;
         CellScript t;
 
@@ -39,7 +40,7 @@ public class CellScript : MonoBehaviour
             {
                 int branchPenalty = tree.limit/(ancestors-tree.lowestBranch);
 
-                for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+1ul) == 1)
+                for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+3ul) == 1)
                 {
                     t.nextBranch=ancestors+tree.branchGap;
                     g = Instantiate(tree.rootCell,transform);
@@ -68,12 +69,13 @@ public class CellScript : MonoBehaviour
 
     ulong getPedigree()
     {
-        ulong pedigree = tree.seed%(transform.childCount==0 ? 127ul:(ulong)transform.childCount);;
-        if(parent != null) pedigree+=parent.getPedigree();
+        ulong pedigree = tree.seed;
+        if(parent != null) pedigree*=parent.getPedigree();
 
-        pedigree += (ulong)spawnSide;
-        pedigree += (transform.childCount==0 ? 1ul:(ulong)transform.childCount);
+        pedigree += (ulong)spawnSide+13ul;
+        pedigree *= (transform.childCount==0 ? 7ul:(ulong)transform.childCount);
 
+        Debug.Log(transform.childCount);
         return pedigree;
     }
 

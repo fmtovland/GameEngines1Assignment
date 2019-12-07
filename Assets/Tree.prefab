@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 432819432778
-  limit: 10
-  branchLimit: 2
-  rootCell: {fileID: 7200847013668151775, guid: b4825b40b71ab49aaae7a99f543d040e,
+  limit: 24
+  branchLimit: 3
+  lowestBranch: 3
+  branchGap: 2
+  rootCell: {fileID: 6182838939947520884, guid: f35351b87d873f136a87d552785d7bd3,
     type: 3}
