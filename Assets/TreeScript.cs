@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TreeScript : MonoBehaviour
 {
-    public int[] limits={0,0,0,0,0};
+    public ulong seed=432819432778;
+    public int limit=10,branchLimit=2;
     public GameObject rootCell;
 
     public void Start()

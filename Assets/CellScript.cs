@@ -13,37 +13,40 @@ public class CellScript : MonoBehaviour
                                         ,Quaternion.AngleAxis(360,Vector3.up) * Quaternion.AngleAxis(90,Vector3.forward)};
 
     public TreeScript tree;
-    public int[] ancestors = {0,0,0,0,0};
+    public CellScript parent;
+    public int ancestors = 0;
+    public int branches = 0;
 
     public IEnumerator spawn()
     {
         yield return new WaitForSeconds(1);
 
-        int sidenum=(int)spawnSide;
-
-        if(ancestors[sidenum]<tree.limits[sidenum])
+        if(ancestors<tree.limit)
         {
             GameObject g = Instantiate(tree.rootCell,transform);
             CellScript t = g.GetComponent<CellScript>();
-            t.ancestors[sidenum]=ancestors[sidenum]+1;
+            t.ancestors=ancestors+1;
             t.spawnSide=spawnSide;
             t.tree=tree;
+            t.parent=this;
             t.StartCoroutine(t.grow());
         }
 
-        if(spawnSide == Side.Below)
+        if(branches<tree.branchLimit)
         {
             GameObject g;
             CellScript t;
 
-            for(int i=0; i<4; i++)
+            for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+5ul) == 1)
             {
                 g = Instantiate(tree.rootCell,transform);
                 g.transform.rotation=rotations[i];
                 t = g.GetComponent<CellScript>();
                 t.spawnSide = (Side)i;
-                t.ancestors[i]=ancestors[i]+1;
+                t.ancestors=ancestors+1;
+                t.branches=branches+1;
                 t.tree=tree;
+                t.parent=this;
                 yield return new WaitForEndOfFrame();
             }
         }
@@ -56,6 +59,17 @@ public class CellScript : MonoBehaviour
             transform.Translate(0,.1f,0);
             yield return new WaitForSeconds(.1f);
         }
+    }
+
+    ulong getPedigree()
+    {
+        ulong pedigree = tree.seed%(transform.childCount==0 ? 17ul:(ulong)transform.childCount);;
+        if(parent != null) pedigree+=parent.getPedigree();
+
+        pedigree += (ulong)spawnSide;
+        pedigree += (transform.childCount==0 ? 1ul:(ulong)transform.childCount);
+
+        return pedigree;
     }
 
     // Start is called before the first frame update

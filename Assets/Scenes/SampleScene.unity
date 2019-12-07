@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c272ff290ace3febb342670427df78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limits: 020000000200000002000000020000000a000000
+  seed: 432819432788
+  limits: 030000000300000003000000030000000f000000
   rootCell: {fileID: 7200847013668151775, guid: b4825b40b71ab49aaae7a99f543d040e,
     type: 3}
