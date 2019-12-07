@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AppleScript : MonoBehaviour
 {
-    static Vector3 growthRate = new Vector3(.0005f,.0005f,.0005f);
     public CellScript parentCell;
+    public GameObject tree;
+
+    static Vector3 growthRate = new Vector3(.0005f,.0005f,.0005f);
     public ulong seed;
-    public int HP=5;
+
     public static List<Vector2> trees=new List<Vector2>();
     public float minimumDistance=10;
 
@@ -53,14 +55,21 @@ public class AppleScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider c)
     {
-        HP--;
-
-        Vector2 spawnPoint = new Vector2(transform.position.x,transform.position.z);
-        if(safeArea(spawnPoint))
+        if(c.tag == "Ground")
         {
-        }
+            Vector2 spawnPoint = new Vector2(transform.position.x,transform.position.z);
+            if(safeArea(spawnPoint))
+            {
+                GameObject t = Instantiate(tree);
+                t.transform.position=transform.position;
+                TreeScript ts = t.GetComponent<TreeScript>();
+                ts.seed=seed;
 
-        if(HP==0) Destroy(gameObject);
+                trees.Add(new Vector2(t.transform.position.x,t.transform.position.z));
+            }
+
+            Destroy(gameObject);
+        }
     }
 
     public bool safeArea(Vector2 p1)

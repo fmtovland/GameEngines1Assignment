@@ -245,4 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentCell: {fileID: 0}
+  tree: {fileID: 2527110498964375237, guid: 39402b96d587acc0abd1d04d5c15013f, type: 3}
   seed: 0
+  minimumDistance: 20
