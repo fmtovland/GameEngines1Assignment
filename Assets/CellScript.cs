@@ -69,9 +69,9 @@ public class CellScript : MonoBehaviour
 
         else if(branches>0)
         {
-            g=Instantiate(tree.apple);
-            g.transform.position = transform.position;
-            //g.transform.rotation*=Quaternion.AngleAxis(90,Vector3.down);
+            g=Instantiate(tree.apple,transform);
+            AppleScript a = g.GetComponent<AppleScript>();
+            a.parentCell=this;
         }
     }
 
@@ -84,7 +84,7 @@ public class CellScript : MonoBehaviour
         }
     }
 
-    ulong getPedigree()
+    public ulong getPedigree()
     {
         ulong pedigree = tree.seed;
         if(parent != null) pedigree*=parent.getPedigree();
@@ -93,6 +93,14 @@ public class CellScript : MonoBehaviour
         pedigree *= (transform.childCount==0 ? 7ul:(ulong)transform.childCount);
 
         return pedigree;
+    }
+
+    public int countLeaves()
+    {
+        int leaves=GetComponentsInChildren<LeafScript>().Length;
+        if(parent != null) leaves+=parent.countLeaves();
+
+        return leaves;
     }
 
     // Start is called before the first frame update
