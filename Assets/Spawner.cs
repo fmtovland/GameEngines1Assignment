@@ -13,5 +13,7 @@ public class Spawner : MonoBehaviour
         GameObject t = Instantiate(tree);
         TreeScript ts = t.GetComponent<TreeScript>();
         ts.seed=seed;
+
+        AppleScript.trees.Add(new Vector2(t.transform.position.x,t.transform.position.z));
     }
 }

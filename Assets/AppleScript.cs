@@ -7,6 +7,9 @@ public class AppleScript : MonoBehaviour
     static Vector3 growthRate = new Vector3(.0005f,.0005f,.0005f);
     public CellScript parentCell;
     public ulong seed;
+    public int HP=5;
+    public static List<Vector2> trees=new List<Vector2>();
+    public float minimumDistance=10;
 
     public IEnumerator drop()
     {
@@ -46,6 +49,31 @@ public class AppleScript : MonoBehaviour
         r.mass=transform.localScale.x;
         r.isKinematic=false;
         transform.parent = null;
+    }
+
+    public void OnTriggerEnter(Collider c)
+    {
+        HP--;
+
+        Vector2 spawnPoint = new Vector2(transform.position.x,transform.position.z);
+        if(safeArea(spawnPoint))
+        {
+        }
+
+        if(HP==0) Destroy(gameObject);
+    }
+
+    public bool safeArea(Vector2 p1)
+    {
+        float safeArea=float.MaxValue;
+
+        foreach(Vector2 p2 in trees)
+        {
+            float tmp=Vector2.Distance(p1,p2);
+            safeArea = tmp<safeArea ? tmp:safeArea;
+        }
+
+        return safeArea>minimumDistance;
     }
 
     // Start is called before the first frame update
