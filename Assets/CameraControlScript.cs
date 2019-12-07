@@ -16,12 +16,12 @@ public class CameraControlScript : MonoBehaviour
     void Update()
     {
         transform.Translate(Time.deltaTime * Input.GetAxis("Horizontal") * speed
-                            ,0
+                            ,Time.deltaTime * (Input.GetAxis("RT")-Input.GetAxis("LT")) * speed
                             ,Time.deltaTime * Input.GetAxis("Vertical") * speed);
 
         transform.Rotate(Time.deltaTime * Input.GetAxis("RVertical") * turnSpeed
                         ,Time.deltaTime * Input.GetAxis("RHorizontal") * turnSpeed
-                        ,Time.deltaTime * (Input.GetAxis("LT")-Input.GetAxis("RT")) * turnSpeed);
+                        ,Time.deltaTime * (Input.GetAxis("LB")-Input.GetAxis("RB")) * turnSpeed);
 
     }
 }
