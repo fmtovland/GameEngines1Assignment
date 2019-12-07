@@ -56,6 +56,11 @@ public class CellScript : MonoBehaviour
                 }
             }
         }
+
+        else
+        {
+            Instantiate(tree.leaf,transform);
+        }
     }
 
     public IEnumerator grow()
@@ -75,7 +80,6 @@ public class CellScript : MonoBehaviour
         pedigree += (ulong)spawnSide+13ul;
         pedigree *= (transform.childCount==0 ? 7ul:(ulong)transform.childCount);
 
-        Debug.Log(transform.childCount);
         return pedigree;
     }
 
