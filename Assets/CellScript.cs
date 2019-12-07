@@ -67,10 +67,11 @@ public class CellScript : MonoBehaviour
             }
         }
 
-        else
+        else if(branches>0)
         {
-            g=Instantiate(tree.leaf,transform);
-            g.transform.rotation*=Quaternion.AngleAxis(90,Vector3.left);
+            g=Instantiate(tree.apple);
+            g.transform.position = transform.position;
+            //g.transform.rotation*=Quaternion.AngleAxis(90,Vector3.down);
         }
     }
 
@@ -98,11 +99,5 @@ public class CellScript : MonoBehaviour
     void Start()
     {
         StartCoroutine(spawn());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
