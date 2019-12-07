@@ -5,13 +5,12 @@ using UnityEngine;
 public class TreeScript : MonoBehaviour
 {
     public ulong seed=432819432778;
-    public int limit=10,branchLimit=2;
+    public int limit=10,branchLimit=2,lowestBranch=3;
     public GameObject rootCell;
 
     public void Start()
     {
-        GameObject cell = Instantiate(rootCell);
-        cell.transform.SetParent(transform);
+        GameObject cell = Instantiate(rootCell,transform);
         CellScript cs = cell.GetComponent<CellScript>();
         cs.tree=this;
     }

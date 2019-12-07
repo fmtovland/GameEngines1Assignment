@@ -32,12 +32,12 @@ public class CellScript : MonoBehaviour
             t.StartCoroutine(t.grow());
         }
 
-        if(branches<tree.branchLimit)
+        if(branches<tree.branchLimit && ancestors>tree.lowestBranch)
         {
             GameObject g;
             CellScript t;
 
-            for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+5ul) == 1)
+            for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+4ul) == 1)
             {
                 g = Instantiate(tree.rootCell,transform);
                 g.transform.rotation=rotations[i];
@@ -63,7 +63,7 @@ public class CellScript : MonoBehaviour
 
     ulong getPedigree()
     {
-        ulong pedigree = tree.seed%(transform.childCount==0 ? 17ul:(ulong)transform.childCount);;
+        ulong pedigree = tree.seed%(transform.childCount==0 ? 127ul:(ulong)transform.childCount);;
         if(parent != null) pedigree+=parent.getPedigree();
 
         pedigree += (ulong)spawnSide;
