@@ -6,6 +6,7 @@ public class TreeScript : MonoBehaviour
 {
     public ulong seed=432819432778;
     public int limit=10,branchLimit=2,lowestBranch=3,branchGap=2;
+    public float spawnSleep=3f;
     public GameObject rootCell,leaf;
 
     public void Start()

@@ -6,10 +6,11 @@ public class LeafScript : MonoBehaviour
 {
     public IEnumerator grow()
     {
-        while(transform.localPosition.y < 1f)
+        float grown=0;
+        while(grown < 1f)
         {
-            Debug.Log(transform.localPosition);
             transform.Translate(0,0,.1f);
+            grown+=.1f;
             yield return new WaitForSeconds(.1f);
         }
     }

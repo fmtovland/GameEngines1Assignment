@@ -21,7 +21,7 @@ public class CellScript : MonoBehaviour
     public IEnumerator spawn()
     {
         tree.seed *= getPedigree();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(tree.spawnSleep);
         GameObject g;
         CellScript t;
 
@@ -30,36 +30,47 @@ public class CellScript : MonoBehaviour
             g = Instantiate(tree.rootCell,transform);
             t = g.GetComponent<CellScript>();
             t.ancestors=ancestors+1;
+            t.branches=branches;
             t.nextBranch=nextBranch;
             t.spawnSide=spawnSide;
             t.tree=tree;
             t.parent=this;
             t.StartCoroutine(t.grow());
 
-            if(branches<tree.branchLimit && ancestors>nextBranch)
+            if(branches<tree.branchLimit)
             {
                 int branchPenalty = tree.limit/(ancestors-tree.lowestBranch);
 
-                for(int i=0; i<4; i++) if(getPedigree() % ((ulong)i+3ul) == 1)
+                if(branches>0) for(int i=0; i<3; i+=2) 
                 {
-                    t.nextBranch=ancestors+tree.branchGap;
-                    g = Instantiate(tree.rootCell,transform);
+                    g = Instantiate(tree.leaf,transform);
                     g.transform.rotation*=rotations[i];
-                    t = g.GetComponent<CellScript>();
-                    t.spawnSide = (Side)i;
-                    t.ancestors=ancestors+(branchPenalty*(1+branches));
-                    t.nextBranch=t.ancestors+tree.lowestBranch;
-                    t.branches=branches+1;
-                    t.tree=tree;
-                    t.parent=this;
-                    yield return new WaitForEndOfFrame();
+                }
+
+                for(int i=0; i<4; i++) 
+                {
+                    if(ancestors>nextBranch && getPedigree() % ((ulong)i+3ul) == 1)
+                    {
+                        t.nextBranch=ancestors+tree.branchGap;
+                        g = Instantiate(tree.rootCell,transform);
+                        g.transform.rotation*=rotations[i];
+                        t = g.GetComponent<CellScript>();
+                        t.spawnSide = (Side)i;
+                        t.ancestors=ancestors+(branchPenalty*(1+branches));
+                        t.nextBranch=t.ancestors+tree.lowestBranch;
+                        t.branches=branches+1;
+                        t.tree=tree;
+                        t.parent=this;
+                        yield return new WaitForEndOfFrame();
+                    }
                 }
             }
         }
 
         else
         {
-            Instantiate(tree.leaf,transform);
+            g=Instantiate(tree.leaf,transform);
+            g.transform.rotation*=Quaternion.AngleAxis(90,Vector3.left);
         }
     }
 
