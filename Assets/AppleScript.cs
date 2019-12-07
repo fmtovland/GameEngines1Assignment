@@ -9,6 +9,7 @@ public class AppleScript : MonoBehaviour
 
     static Vector3 growthRate = new Vector3(.0005f,.0005f,.0005f);
     public ulong seed;
+    public float lifespan=30;
 
     public static List<Vector2> trees=new List<Vector2>();
     public float minimumDistance=10;
@@ -53,7 +54,13 @@ public class AppleScript : MonoBehaviour
         transform.parent = null;
     }
 
-    public void OnTriggerEnter(Collider c)
+    public IEnumerator rot()
+    {
+        yield return new WaitForSeconds(lifespan);
+        Destroy(gameObject);
+    }
+
+    public void OnTriggerEnter(Collider c)  //germinate
     {
         if(c.tag == "Ground")
         {
@@ -66,9 +73,8 @@ public class AppleScript : MonoBehaviour
                 ts.seed=seed;
 
                 trees.Add(new Vector2(t.transform.position.x,t.transform.position.z));
+                Destroy(gameObject);
             }
-
-            Destroy(gameObject);
         }
     }
 
@@ -91,5 +97,6 @@ public class AppleScript : MonoBehaviour
         transform.rotation=Quaternion.AngleAxis(0,Vector3.up);
         StartCoroutine(grow());
         StartCoroutine(drop());
+        StartCoroutine(rot());
     }
 }
