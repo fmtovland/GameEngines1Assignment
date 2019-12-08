@@ -8,7 +8,6 @@ A seed is generated from System.Random.NextDouble and then cast to an unsigned l
 The controller script from the camera was largely covered in class. Spawning from a prefab was too, as well as making them.
 
 # What is original
-Markup :
-        * The algorithm for spawning cells is original.
-        * The use of recursion through ancestors is a trick I have used before.
-        * The algorithm to check distance from every other tree before germinating is based on the Vector2.distance trick shown in class, but ultimately my own work.
+Markup : * The algorithm for spawning cells is original.
+         * The use of recursion through ancestors is a trick I have used before.
+         * The algorithm to check distance from every other tree before germinating is based on the Vector2.distance trick shown in class, but ultimately my own work.
