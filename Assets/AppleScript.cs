@@ -7,7 +7,7 @@ public class AppleScript : MonoBehaviour
     public CellScript parentCell;
     public GameObject tree;
 
-    static Vector3 growthRate = new Vector3(.0005f,.0005f,.0005f);
+    public float growthRate=1.05f;
     public ulong seed;
     public float lifespan=30;
 
@@ -29,10 +29,11 @@ public class AppleScript : MonoBehaviour
     {
         int leaves = parentCell.countLeaves();
 
-        if(leaves>0) while(transform.localScale.x<1f)
+        if(leaves>0) while(transform.localScale.x<(leaves/1000))
         {
             leaves = parentCell.countLeaves();
-            transform.localScale+=(growthRate * leaves);
+            transform.localScale*=growthRate;
+            transform.position=transform.parent.position + new Vector3(0,-transform.localScale.y,0);
             yield return new WaitForSeconds(.1f);
         }
 
@@ -42,6 +43,7 @@ public class AppleScript : MonoBehaviour
         }
 
         StartCoroutine(fall());
+        //StartCoroutine(rot());
     }
 
     public IEnumerator fall()
@@ -96,7 +98,6 @@ public class AppleScript : MonoBehaviour
     {
         transform.rotation=Quaternion.AngleAxis(0,Vector3.up);
         StartCoroutine(grow());
-        StartCoroutine(drop());
-        StartCoroutine(rot());
+//        StartCoroutine(drop());
     }
 }
