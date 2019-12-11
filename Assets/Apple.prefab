@@ -192,7 +192,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2359077463047245075}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7ef62b82e4284673297cd1c549d7df34, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentCell: {fileID: 0}
   tree: {fileID: 2527110498964375237, guid: 39402b96d587acc0abd1d04d5c15013f, type: 3}
-  growthRate: 1.05
+  growthRate: 1.0621
   seed: 0
   lifespan: 15
   minimumDistance: 18

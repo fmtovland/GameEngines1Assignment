@@ -14,17 +14,6 @@ public class AppleScript : MonoBehaviour
     public static List<Vector2> trees=new List<Vector2>();
     public float minimumDistance=10;
 
-    public IEnumerator drop()
-    {
-        float grown=0;
-        while(grown < 1f)
-        {
-            transform.Translate(0,-.1f,0);
-            grown+=.1f;
-            yield return new WaitForSeconds(.1f);
-        }
-    }
-
     public IEnumerator grow()
     {
         int leaves = parentCell.countLeaves();
@@ -43,7 +32,7 @@ public class AppleScript : MonoBehaviour
         }
 
         StartCoroutine(fall());
-        //StartCoroutine(rot());
+        StartCoroutine(rot());
     }
 
     public IEnumerator fall()
@@ -53,6 +42,7 @@ public class AppleScript : MonoBehaviour
         Rigidbody r = gameObject.AddComponent<Rigidbody>();
         r.mass=transform.localScale.x;
         r.isKinematic=false;
+        r.AddForce(transform.forward * (seed%minimumDistance));
         transform.parent = null;
     }
 
@@ -98,6 +88,5 @@ public class AppleScript : MonoBehaviour
     {
         transform.rotation=Quaternion.AngleAxis(0,Vector3.up);
         StartCoroutine(grow());
-//        StartCoroutine(drop());
     }
 }
