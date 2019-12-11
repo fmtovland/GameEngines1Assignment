@@ -53,7 +53,6 @@ public class AppleScript : MonoBehaviour
     {
         float waitme=lifespan/phases;
         float offset=1f/phases;
-        Debug.Log(offset);
 
         for(int i=0; i<phases; i++)
         {
