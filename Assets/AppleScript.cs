@@ -6,10 +6,12 @@ public class AppleScript : MonoBehaviour
 {
     public CellScript parentCell;
     public GameObject tree;
+    public Material appleTexture;
 
     public float growthRate=1.05f;
     public ulong seed;
     public float lifespan=30;
+    public int phases=100;
 
     public static List<Vector2> trees=new List<Vector2>();
     public float minimumDistance=10;
@@ -49,7 +51,15 @@ public class AppleScript : MonoBehaviour
 
     public IEnumerator rot()
     {
-        yield return new WaitForSeconds(lifespan);
+        float waitme=lifespan/phases;
+        float offset=1f/phases;
+        Debug.Log(offset);
+
+        for(int i=0; i<phases; i++)
+        {
+            appleTexture.color = new Color(appleTexture.color.r-(offset),0,0,1);
+            yield return new WaitForSeconds(waitme);
+        }
         Destroy(gameObject);
     }
 
@@ -88,6 +98,7 @@ public class AppleScript : MonoBehaviour
     void Start()
     {
         transform.rotation=Quaternion.AngleAxis(0,Vector3.up);
+        appleTexture=transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material;
         StartCoroutine(grow());
     }
 }
