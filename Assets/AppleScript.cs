@@ -32,7 +32,6 @@ public class AppleScript : MonoBehaviour
         }
 
         StartCoroutine(fall());
-        StartCoroutine(rot());
     }
 
     public IEnumerator fall()
@@ -44,6 +43,8 @@ public class AppleScript : MonoBehaviour
         r.isKinematic=false;
         r.AddForce(transform.forward * (seed%minimumDistance));
         transform.parent = null;
+
+        StartCoroutine(rot());
     }
 
     public IEnumerator rot()
