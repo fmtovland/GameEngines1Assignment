@@ -18,7 +18,7 @@ A seed is generated from System.Random.NextDouble and then cast to an unsigned l
 * All models are my own work.
 
 # Where is my pride
-I am most proud of the use of ancestoral recursion. Recursion is a programming technique where a function calls itself. In this case functions call themselves but on the parent cell. It is used in the functions getPedigree and countLeaves. getPedigree is used to salt the seed for generating new seeds to put in the apples. It's basically my own pseudo random algorithm (probably been done before, but I figured it out on my own, without google's help). The fact that I only googled things about the unity api itself, and nothing about algorithms besides the algorithm to generate the inital value is also a source of pride for me. I'm also kinda proud it doesn't look like garbage, like everything else I've ever made visually. The christmas theme was a total accident.
+I am most proud of the use of ancestoral recursion. Recursion is a programming technique where a function calls itself. In this case functions call themselves but on the parent cell. It is used in the functions getPedigree and countLeaves. getPedigree is used to salt the seed for generating new seeds to put in the apples. This means it's not randomness but the butterfly effect. The fact that I only googled things about the unity api itself, and nothing about algorithms besides the algorithm to generate the inital value is also a source of pride for me. I'm also kinda proud it doesn't look like garbage, like everything else I've ever made visually. The christmas theme was a total accident.
 
 # Build and run
 You may wish to modify the controls. They are for an XBox360 controller on linux. Other than that, standard unity project.
