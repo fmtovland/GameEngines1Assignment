@@ -24,4 +24,4 @@ I am most proud of the use of ancestoral recursion. Recursion is a programming t
 You may wish to modify the controls. They are for an XBox360 controller on linux. Other than that, standard unity project.
 
 # Demo
-[![YouTube](http://img.youtube.com/vi/eycAZE6EiNQ/0.jpg)](https://www.youtube.com/watch?v=eycAZE6EiNQ)
+[![YouTube](http://img.youtube.com/vi/ltsh8RBHQcY/0.jpg)](https://www.youtube.com/watch?v=ltsh8RBHQcY)
